@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-local-links/node_modules/local-links/local-links.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-local-links">npmtest-local-links (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-local-links/node_modules/local-links/local-links.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">16.44% <small>(12 / 73)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 77)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 11)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">16.44% <small>(12 / 73)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-local-links/node_modules/local-links/</a> &#187; local-links.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="fstat-no" title="function not covered" >function isHTMLElement (obj) {</span>
+<span class="cstat-no" title="statement not covered" >  return obj &amp;&amp;</span>
+    (typeof obj === 'object') &amp;&amp;
+    (obj.nodeType === 1) &amp;&amp;
+    (typeof obj.style === 'object') &amp;&amp;
+    (typeof obj.ownerDocument === 'object')
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function isA (obj) {</span>
+<span class="cstat-no" title="statement not covered" >  return isHTMLElement(obj) &amp;&amp; obj.tagName === 'A'</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function closestA (checkNode) {</span>
+<span class="cstat-no" title="statement not covered" >  do {</span>
+<span class="cstat-no" title="statement not covered" >    if (isA(checkNode)) {</span>
+<span class="cstat-no" title="statement not covered" >      return checkNode</span>
+    }
+  } while ((checkNode = checkNode.parentNode))
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function normalizeLeadingSlash (pathname) {</span>
+<span class="cstat-no" title="statement not covered" >  if (pathname.charAt(0) !== '/') {</span>
+<span class="cstat-no" title="statement not covered" >    pathname = '/' + pathname</span>
+  }
+<span class="cstat-no" title="statement not covered" >  return pathname</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function isRelativeUrl (href) {</span>
+<span class="cstat-no" title="statement not covered" >  var r = /^https?:\/\/|^\/\//i</span>
+<span class="cstat-no" title="statement not covered" >  return !r.test(href)</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function isSecondaryButton (event) {</span>
+<span class="cstat-no" title="statement not covered" >  return (typeof event === 'object') &amp;&amp; ('button' in event) &amp;&amp; event.button !== 0</span>
+}
+&nbsp;
+// [1] http://blogs.msdn.com/b/ieinternals/archive/2011/02/28/internet-explorer-window-location-pathname-missing-slash-and-host-has-port.aspx
+// [2] https://github.com/substack/catch-links/blob/7aee219cdc2c845c78caad6070886a9380b90e4c/index.js#L13-L17
+// [3] IE10 (and possibly later) report that anchor.port is the default port
+//     but dont append it to the hostname, so if the host doesnt end with the port
+//     append it to the anchor host as well
+&nbsp;
+<span class="fstat-no" title="function not covered" >function isLocal (event, anchor, lookForHash) {</span>
+<span class="cstat-no" title="statement not covered" >  event || (event = {})</span>
+&nbsp;
+  // Skip modifier events
+<span class="cstat-no" title="statement not covered" >  if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {</span>
+<span class="cstat-no" title="statement not covered" >    return null</span>
+  }
+&nbsp;
+  // Skip non-primary clicks
+<span class="cstat-no" title="statement not covered" >  if (isSecondaryButton(event)) {</span>
+<span class="cstat-no" title="statement not covered" >    return null</span>
+  }
+&nbsp;
+  // If we have an anchor but its not an A tag
+  // try to find the closest one
+<span class="cstat-no" title="statement not covered" >  if (anchor &amp;&amp; !isA(anchor)) {</span>
+<span class="cstat-no" title="statement not covered" >    anchor = closestA(anchor)</span>
+  }
+&nbsp;
+  // Only test anchor elements
+<span class="cstat-no" title="statement not covered" >  if (!anchor || !isA(anchor)) {</span>
+<span class="cstat-no" title="statement not covered" >    return null</span>
+  }
+&nbsp;
+  // Dont test anchors with target=_blank
+<span class="cstat-no" title="statement not covered" >  if (anchor.target === '_blank') {</span>
+<span class="cstat-no" title="statement not covered" >    return null</span>
+  }
+&nbsp;
+  // IE9 doesn't put a leading slash on anchor.pathname [1]
+<span class="cstat-no" title="statement not covered" >  var aPathname = normalizeLeadingSlash(anchor.pathname)</span>
+<span class="cstat-no" title="statement not covered" >  var wPathname = normalizeLeadingSlash(window.location.pathname)</span>
+<span class="cstat-no" title="statement not covered" >  var aHost = anchor.host</span>
+<span class="cstat-no" title="statement not covered" >  var aPort = anchor.port</span>
+<span class="cstat-no" title="statement not covered" >  var wHost = window.location.host</span>
+<span class="cstat-no" title="statement not covered" >  var wPort = window.location.port</span>
+&nbsp;
+  // In some cases, IE will have a blank host property when the href
+  // is a relative URL. We can check for relativeness via the achor's
+  // href attribute and then set the anchor's host to the window's host.
+<span class="cstat-no" title="statement not covered" >  if (aHost === '' &amp;&amp;</span>
+    'attributes' in anchor &amp;&amp;
+    'href' in anchor.attributes &amp;&amp;
+    'value' in anchor.attributes.href &amp;&amp;
+    isRelativeUrl(anchor.attributes.href.value)) {
+<span class="cstat-no" title="statement not covered" >    aHost = wHost</span>
+  }
+&nbsp;
+  // Some browsers (Chrome 36) return an empty string for anchor.hash
+  // even when href="#", so we also check the href
+<span class="cstat-no" title="statement not covered" >  var aHash = anchor.hash || (anchor.href.indexOf('#') &gt; -1 ? '#' + anchor.href.split('#')[1] : null)</span>
+<span class="cstat-no" title="statement not covered" >  var inPageHash</span>
+&nbsp;
+  // Window has no port, but anchor has the default port
+<span class="cstat-no" title="statement not covered" >  if (!wPort &amp;&amp; aPort &amp;&amp; (aPort === '80' || aPort === '443')) {</span>
+    // IE9 sometimes includes the default port (80 or 443) on anchor.host
+    // so we append the default port to the window host in this case
+    // so they will match for the host equality check [1]
+<span class="cstat-no" title="statement not covered" >    wHost += ':' + aPort</span>
+<span class="cstat-no" title="statement not covered" >    aHost += aHost.indexOf(aPort, aHost.length - aPort.length) === -1 ? ':' + aPort : '' </span>// [3]
+  }
+&nbsp;
+  // Hosts are the same, its a local link
+<span class="cstat-no" title="statement not covered" >  if (aHost === wHost) {</span>
+    // If everything else is the same
+    // and hash exists, then it is an in-page hash [2]
+<span class="cstat-no" title="statement not covered" >    inPageHash =</span>
+      aPathname === wPathname &amp;&amp;
+      anchor.search === window.location.search &amp;&amp;
+      aHash
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (lookForHash === true) {</span>
+      // If we are looking for the hash then this will
+      // only return a truthy value if the link
+      // is an *in-page* hash link
+<span class="cstat-no" title="statement not covered" >      return inPageHash</span>
+    } else {
+      // If this is an in page hash link
+      // then ignore it because we werent looking for hash links
+<span class="cstat-no" title="statement not covered" >      return inPageHash</span>
+        ? null
+        : aPathname + (anchor.search || '') + (aHash || '')
+    }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return null</span>
+}
+&nbsp;
+// Take two arguments and return an ordered array of [event, anchor]
+<span class="fstat-no" title="function not covered" >function getEventAndAnchor (arg1, arg2) {</span>
+<span class="cstat-no" title="statement not covered" >  var ev = null</span>
+<span class="cstat-no" title="statement not covered" >  var anchor = null</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (arguments.length === 2) {</span>
+    // Two arguments will come in this order
+<span class="cstat-no" title="statement not covered" >    ev = arg1</span>
+<span class="cstat-no" title="statement not covered" >    anchor = arg2</span>
+  } else <span class="cstat-no" title="statement not covered" >if (isHTMLElement(arg1)) {</span>
+    // If our first arg is an element
+    // then use that as our anchor
+<span class="cstat-no" title="statement not covered" >    anchor = arg1</span>
+  } else {
+    // Otherwise our argument is an event
+<span class="cstat-no" title="statement not covered" >    ev = arg1</span>
+  }
+&nbsp;
+    // If there is no anchor, but we have an event
+    // then use event.target
+<span class="cstat-no" title="statement not covered" >  if (!anchor &amp;&amp; ev &amp;&amp; ev.target) {</span>
+<span class="cstat-no" title="statement not covered" >    anchor = ev.target</span>
+  }
+&nbsp;
+    // Return an array so that it can be used with Function.apply
+<span class="cstat-no" title="statement not covered" >  return [ev, anchor]</span>
+}
+&nbsp;
+// Functions to be used in exports. Defined here for alias purposes
+<span class="fstat-no" title="function not covered" >function pathname () {</span>
+<span class="cstat-no" title="statement not covered" >  return isLocal.apply(null, getEventAndAnchor.apply(null, arguments))</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function hash () {</span>
+<span class="cstat-no" title="statement not covered" >  return isLocal.apply(null, getEventAndAnchor.apply(null, arguments).concat(true))</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function active () {</span>
+<span class="cstat-no" title="statement not covered" >  var args = Array.prototype.slice.call(arguments)</span>
+<span class="cstat-no" title="statement not covered" >  var last = args[args.length - 1]</span>
+<span class="cstat-no" title="statement not covered" >  var checkPath = window.location.pathname</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (typeof last === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >    checkPath = last</span>
+<span class="cstat-no" title="statement not covered" >    args = args.slice(0, -1)</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return pathname.apply(null, args) === normalizeLeadingSlash(checkPath)</span>
+}
+&nbsp;
+module.exports = {
+  isLocal: isLocal,
+  pathname: pathname,
+  getLocalPathname: pathname,
+  hash: hash,
+  getLocalHash: hash,
+  active: active,
+  isActive: active
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Wed Apr 19 2017 11:39:27 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
